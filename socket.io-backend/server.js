@@ -1,14 +1,17 @@
 const io = require("socket.io")();
-let currentUserId = 2;
 const messageHandler = require("./handlers/message.handlers");
 
-const userIds = {};
-
+const users = {};
+let currentUserId = 2;
 
 io.on("connection", socket => {
-    console.log("connected");
+    console.log("a user connected");
     console.log(socket.id);
-    userIds[socket.id] = currentUserId++;
-    messageHandler.handleMessage(socket, userIds)
+    users[socket.id] = { userId: currentUserId++ };
+    socket.on("join", username => {
+        users[socket.id].username = username;
+
+    })
+    messageHandler.handleMessage(socket, userIds);
 })
 io.listen(3001);
