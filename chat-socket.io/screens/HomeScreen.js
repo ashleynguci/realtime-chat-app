@@ -1,18 +1,30 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import io from 'socket.io-client';
 
 export default function HomeScreen() {
-    const [sendMessage, setSendMessage] = useState("");
-
+    const [sentMessage, setSentMessage] = useState("");
+    const [recvMessage, setRecvMessage] = useState([]);
+    const socket = useRef(null);
     useEffect(() => {
-        io("http://10.213.224.58:3001")
+        socket.current = io("http://10.213.224.58:3001");
+        socket.current.on("message", message => {
+            setRecvMessage(prevState => [...prevState, message]);
+        })
     }, [])
+
+    const sendMessage = () => {
+        socket.current.emit("message", sentMessage);
+        setSentMessage("");
+    }
+
+    const showRecvMessage = recvMessage.map(msg => (<Text key={msg}>{msg}</Text>))
+
     return (
         <View style={styles.container}>
-            <Text>Real time chat App!</Text>
-            <TextInput value={sendMessage} onChangeText={(text) => setSendMessage(text)} placeholder="Enter chat message..." />
+            {showRecvMessage}
+            <TextInput value={sentMessage} onChangeText={(text) => setSentMessage(text)} placeholder="Enter chat message..." onSubmitEditing={sendMessage} />
         </View>
     );
 }
