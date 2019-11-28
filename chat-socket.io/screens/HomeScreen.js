@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState, useRef } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, View, Platform, KeyboardAvoidingView } from 'react-native';
 import io from 'socket.io-client';
-
+import { GiftedChat } from "react-native-gifted-chat";
 export default function HomeScreen() {
     const [sentMessage, setSentMessage] = useState("");
     const [recvMessage, setRecvMessage] = useState([]);
@@ -11,7 +11,19 @@ export default function HomeScreen() {
         socket.current = io("http://10.213.224.58:3001");
         socket.current.on("message", message => {
             setRecvMessage(prevState => [...prevState, message]);
-        })
+        });
+        setRecvMessage([
+            {
+                _id: 1,
+                text: 'Hello developer',
+                createdAt: new Date(),
+                user: {
+                    _id: 2,
+                    name: 'React Native',
+                    avatar: 'https://placeimg.com/140/140/any',
+                },
+            },
+        ])
     }, [])
 
     const sendMessage = () => {
@@ -19,12 +31,23 @@ export default function HomeScreen() {
         setSentMessage("");
     }
 
-    const showRecvMessage = recvMessage.map(msg => (<Text key={msg}>{msg}</Text>))
+    //const showRecvMessage = recvMessage.map(msg => (<Text key={msg}>{msg}</Text>))
 
     return (
-        <View style={styles.container}>
-            {showRecvMessage}
-            <TextInput value={sentMessage} onChangeText={(text) => setSentMessage(text)} placeholder="Enter chat message..." onSubmitEditing={sendMessage} />
+        <View style={{ flex: 1 }}>
+            {/* //<View style={styles.container}> */}
+            {/* {showRecvMessage} 
+         <TextInput value={sentMessage} onChangeText={(text) => setSentMessage(text)} placeholder="Enter chat message..." onSubmitEditing={sendMessage} />  */}
+            <GiftedChat
+                messages={recvMessage}
+                //onSend={messages => this.onSend(messages)}
+                user={{
+                    _id: 1,
+                }}
+            />
+            {
+                Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
+            }
         </View>
     );
 }
