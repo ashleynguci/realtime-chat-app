@@ -10,7 +10,18 @@ export default function HomeScreen() {
     useEffect(() => {
         socket.current = io("http://10.213.224.58:3001");
         socket.current.on("message", message => {
-            setRecvMessage(prevState => [...prevState, message]);
+            const textMessage = {
+                _id: 3,
+                text: 'Hello developer',
+                createdAt: new Date(),
+                user: {
+                    _id: 2,
+                    name: 'React Native',
+                    avatar: 'https://placeimg.com/140/140/any',
+                }
+            }
+            textMessage.text = message;
+            setRecvMessage(prevState => [textMessage, ...prevState]);
         });
         setRecvMessage([
             {
@@ -23,12 +34,23 @@ export default function HomeScreen() {
                     avatar: 'https://placeimg.com/140/140/any',
                 },
             },
+            {
+                _id: 2,
+                text: 'Hello Ashley',
+                createdAt: new Date(),
+                user: {
+                    _id: 1,
+                    name: 'React Native',
+                    avatar: 'https://placeimg.com/140/140/any',
+                },
+            },
         ])
     }, [])
 
-    const sendMessage = () => {
-        socket.current.emit("message", sentMessage);
-        setSentMessage("");
+    const onSend = (messages) => {
+        console.log(messages);
+        socket.current.emit("message", messages[0].text);
+        //setSentMessage("");
     }
 
     //const showRecvMessage = recvMessage.map(msg => (<Text key={msg}>{msg}</Text>))
@@ -40,7 +62,7 @@ export default function HomeScreen() {
          <TextInput value={sentMessage} onChangeText={(text) => setSentMessage(text)} placeholder="Enter chat message..." onSubmitEditing={sendMessage} />  */}
             <GiftedChat
                 messages={recvMessage}
-                //onSend={messages => this.onSend(messages)}
+                onSend={messages => onSend(messages)}
                 user={{
                     _id: 1,
                 }}
