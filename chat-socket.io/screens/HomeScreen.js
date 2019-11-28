@@ -22,6 +22,10 @@ export default function HomeScreen() {
         setRecvMessage(prevState => GiftedChat.append(prevState, messages));
 
     }
+    const signIn = username => {
+        socket.current.emit("join", username);
+        setHasSignIn(true);
+    }
     //66159148
 
 
@@ -33,7 +37,7 @@ export default function HomeScreen() {
                 user={{
                     _id: 1,
                 }}
-            />) : (<SignInScreen />)}
+            />) : (<SignInScreen signIn={signIn} />)}
             {
                 Platform.OS === 'android' && <KeyboardAvoidingView behavior="padding" />
             }
