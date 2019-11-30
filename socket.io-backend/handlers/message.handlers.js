@@ -7,13 +7,13 @@ function createMessage(user, messageText) {
         user: {
             _id: user.userId,
             name: user.name,
-            avatar: 'https://placeimg.com/140/140/any',
+            avatar: user.avatar,
         }
     }
 }
 function handleMessage(socket, users) {
     socket.on("message", textMessage => {
-        const user = userIds[socket.id];
+        const user = users[socket.id];
         const message = createMessage(user, textMessage);
 
         socket.broadcast.emit("message", message);

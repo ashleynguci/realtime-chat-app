@@ -4,14 +4,20 @@ const messageHandler = require("./handlers/message.handlers");
 const users = {};
 let currentUserId = 2;
 
+const createUserAvatar = () => {
+    const ran1 = Math.round(Math.random() * 200 + 100);
+    const ran2 = Math.round(Math.random() * 200 + 100);
+    return `https://placeimg.com/${ran1}/${ran2}/any`
+};
 io.on("connection", socket => {
     console.log("a user connected");
     console.log(socket.id);
     users[socket.id] = { userId: currentUserId++ };
     socket.on("join", username => {
         users[socket.id].username = username;
-
+        users[socket.id].avatar = createUserAvatar();
+        messageHandler.handleMessage(socket, users);
     })
-    messageHandler.handleMessage(socket, userIds);
+
 })
 io.listen(3001);
