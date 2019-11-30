@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, TextInput, Image, Button, Platform, KeyboardAvoidingView } from 'react-native'
+import { View, TextInput, Image, Button, Platform, KeyboardAvoidingView } from 'react-native'
 
 export default function SignInScreen({ signIn }) {
     const [username, setUsername] = useState("");
