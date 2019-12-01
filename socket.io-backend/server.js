@@ -22,7 +22,13 @@ io.on("connection", socket => {
         switch (action.type) {
             case "server/hello":
                 console.log("Got hello event", action.data);
-                socket.emit("action", { type: "message", data: "Good day!" })
+                socket.emit("action", { type: "message", data: "Good day!" });
+                break;
+            case "server/join":
+                console.log("Got signin event", action.data);
+                users[socket.id].username = action.data;
+                users[socket.id].avatar = createUserAvatar();
+                break;
         }
     })
 

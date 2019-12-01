@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, TextInput, Image, Button, Platform, KeyboardAvoidingView } from 'react-native'
 import { useDispatch } from 'react-redux';
 
-export default function SignInScreen({ signIn }) {
+export default function SignInScreen({ navigation }) {
     const dispatch = useDispatch();
     const [username, setUsername] = useState("");
     return (
@@ -16,11 +16,14 @@ export default function SignInScreen({ signIn }) {
                     style={{
                         fontSize: 25, textAlign: "center"
                     }} placeholder="Enter username..." />
-                <Button title="Sign in" onPress={() => dispatch({ type: "server/signin", data: username })} />
+                <Button title="Sign in" onPress={() => {
+                    dispatch({ type: "server/join", data: username });
+                    navigation.navigate("App")
+                }} />
             </View>
-            {
-                Platform.OS === 'ios' && <KeyboardAvoidingView behavior="padding" />
-            }
+
+            <KeyboardAvoidingView behavior="padding" />
+
         </View>
     )
 
