@@ -28,6 +28,9 @@ io.on("connection", socket => {
                 console.log("Got signin event", action.data);
                 users[socket.id].username = action.data;
                 users[socket.id].avatar = createUserAvatar();
+                const values = Object.values(users);
+                const usernameFilter = values.filter(u => u.username !== undefined);
+                io.emit("action", { type: "users_online", data: usernameFilter })
                 break;
         }
     })
