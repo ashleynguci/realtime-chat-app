@@ -26,7 +26,7 @@ io.on("connection", socket => {
     });
     socket.on("disconnect", () => {
         delete users[socket.id];
-        io.emit("action", { type: "users_online", data: createUserOnline() })
+        io.emit("action", { type: "online_List", data: createUserOnline() })
     })
     socket.on("action", action => {
         switch (action.type) {
@@ -38,8 +38,7 @@ io.on("connection", socket => {
                 console.log("Got signin event", action.data);
                 users[socket.id].username = action.data;
                 users[socket.id].avatar = createUserAvatar();
-
-                io.emit("action", { type: "users_online", data: createUserOnline() })
+                io.emit("action", { type: "online_List", data: createUserOnline() })
                 break;
         }
     })
