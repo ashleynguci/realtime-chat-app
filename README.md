@@ -34,5 +34,6 @@ Using React Native (Hook), Socket.IO, Nodejs, Redux, react-navigation, and Gifte
     Run frontend
     ```sh
     # go to chat-socket.io
+    npm install
     npm start
     ```
