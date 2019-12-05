@@ -11,7 +11,7 @@ export default function OnlineListScreen({ navigation }) {
 
         <View style={{ flex: 1 }}>
             <FlatList data={onlineList} renderItem={({ item }) => {
-                console.log("item", item); return <TouchableOpacity onPress={() => navigation.navigate("Chat", { name: item.username })}><View style={itemContainerStyle}>
+                console.log("item", item); return <TouchableOpacity onPress={() => navigation.navigate("Chat", { name: item.username, userId: item.userId })}><View style={itemContainerStyle}>
                     <Image style={imageStyle} source={{ uri: item.avatar }} />
                     <View style={usernameStyle}><Text>{item.username}</Text></View></View></TouchableOpacity>
             }}

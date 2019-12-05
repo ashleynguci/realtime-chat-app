@@ -40,6 +40,8 @@ io.on("connection", socket => {
                 users[socket.id].avatar = createUserAvatar();
                 io.emit("action", { type: "online_List", data: createUserOnline() })
                 break;
+            case "server/private-message":
+                console.log("got", action.data);
         }
     })
 
