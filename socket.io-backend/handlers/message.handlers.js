@@ -1,5 +1,5 @@
 let currentMessageId = 1;
-function createMessage(user, messageText) {
+const createMessage = (user, messageText) => {
     return {
         _id: currentMessageId++,
         text: messageText,
@@ -11,7 +11,7 @@ function createMessage(user, messageText) {
         }
     }
 }
-function handleMessage(socket, users) {
+const handleMessage = (socket, users) => {
     socket.on("message", textMessage => {
         const user = users[socket.id];
         const message = createMessage(user, textMessage);

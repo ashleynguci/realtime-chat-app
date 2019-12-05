@@ -11,7 +11,7 @@ export default function HomeScreen() {
 
 
     useEffect(() => {
-        socket.current = io("http://192.168.0.100:3001");
+        socket.current = io("http://192.168.0.102:3001");
         socket.current.on("message", message => {
             setRecvMessage(prevState => GiftedChat.append(prevState, message));
         });
