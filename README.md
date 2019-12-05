@@ -11,14 +11,14 @@
 1.  **Step 2.**
     Check your IP address for backend connect
     ```sh
-    # Type on Terminal to find do IP, it looks like that: inet 192.168.0.100 netmask 0xffffff00 broadcast 192.168.0.255. Take the 192.168.0.100 part/
+    # Type on Terminal to find the IP address, it looks like that: inet 192.168.0.100 netmask 0xffffff00 broadcast 192.168.0.255. Take the 192.168.0.100 part/
     ifconfig (for iOS)
     ipconfig
     ```
 1.  **Step 3.**
-    Change the IP
+    Change the IP address
     ```sh
-    # in chat-socket.io/App.js/ line 13, change the IP below, remember:3001 at the end
+    # in chat-socket.io/App.js/ line 13, change the IP that you found above, and add to the link below, remember add :3001 at the end
     const socket = io("http://192.168.0.100:3001");
     ```
 1.  **Step 4.**
