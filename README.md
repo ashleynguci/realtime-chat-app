@@ -1,5 +1,8 @@
 # realtime-chat-app
 
+This is my final project for mobile programming course at Haaga-Helia.  
+Using React Native (Hook), Socket.IO, Nodejs, Redux, react-navigation, and Gifted Chat UI.
+
 ## 🚀 Quick start
 
 1.  **Step 1.**
