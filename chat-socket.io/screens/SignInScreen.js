@@ -3,9 +3,6 @@ import { Text, View, TextInput, ImageBackground, Image, KeyboardAvoidingView, St
 import { useDispatch } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-
-
-
 export default function SignInScreen({ navigation }) {
 
     const dispatch = useDispatch();
@@ -80,7 +77,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         paddingBottom: 10,
     },
-
     signInButton: {
         alignSelf: 'center',
         backgroundColor: '#CF7C77',

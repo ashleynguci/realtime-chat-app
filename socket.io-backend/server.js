@@ -1,5 +1,5 @@
 const io = require("socket.io")();
-const messageHandler = require("./handlers/message.handlers");
+// const messageHandler = require("./handlers/message.handlers");
 const uuidv1 = require("uuid/v1");
 const users = {};
 

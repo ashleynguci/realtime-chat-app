@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 export default function OnlineListScreen({ navigation }) {
     const onlineList = useSelector(state => state.onlineList);
-    const { itemContainerStyle, imageStyle, usernameStyle, arrowStyle, usernameText, loggedInText, activeHeadline } = styles;
+    const { itemContainerStyle, imageStyle, usernameStyle, arrowStyle, usernameText, loggedInText, activeHeadline, signInButton, textButton } = styles;
 
     return (
         <View style={{ flex: 1 }}>
@@ -23,10 +23,16 @@ export default function OnlineListScreen({ navigation }) {
 
                     </View>
                 </TouchableOpacity>
+
             }}
                 keyExtractor={item => item.userId}
 
             ></FlatList>
+            <TouchableOpacity style={signInButton} onPress={() => {
+                navigation.navigate("SignIn")
+            }}>
+                <Text style={textButton}>Sign Out</Text>
+            </TouchableOpacity>
 
         </View>
 
@@ -86,6 +92,23 @@ const styles = StyleSheet.create({
         flex: .2,
         alignSelf: 'center',
         justifyContent: 'center'
+    },
+    signInButton: {
+        alignSelf: 'center',
+        backgroundColor: '#CF7C77',
+        color: '#333',
+        marginTop: 50,
+        width: '45%',
+        height: 50,
+        borderRadius: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 70
+    },
+    textButton: {
+        color: '#ffffff',
+        fontWeight: 'bold',
+        fontSize: 18
     }
 });
 
