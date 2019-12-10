@@ -27,11 +27,12 @@ io.on("connection", socket => {
     socket.on("action", action => {
         switch (action.type) {
             case "server/join":
-                console.log("Got join event", action.data);
                 users[socket.id].username = action.data;
                 users[socket.id].avatar = createUserAvatar();
                 io.emit("action", { type: "online_List", data: createUserOnline() });
+                //io.emit sending to all clients, include sender
                 socket.emit("action", { type: "self_user", data: users[socket.id] })
+                //socket.emit sending to sender-client only
                 break;
             case "server/private_message":
                 const conversationId = action.data.conversationId;
@@ -41,6 +42,7 @@ io.on("connection", socket => {
                 for (let i = 0; i < userValues.length; i++) {
                     if (userValues[i].userId === conversationId) {
                         const socketId = socketIds[i];
+                        //io.sockets.emit(); send to all connected clients (same as socket.emit)
                         io.sockets.sockets[socketId].emit("action", {
                             type: "private_message", data: {
                                 ...action.data, conversationId: from
