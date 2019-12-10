@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 import React from 'react';
 import Container from './Container';
 
-const socket = io("http://192.168.0.100:3001");
+const socket = io("http://192.168.0.101:3001");
 const socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
 
 const reducer = (state = {}, action) => {

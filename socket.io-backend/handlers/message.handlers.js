@@ -15,7 +15,6 @@ const handleMessage = (socket, users) => {
     socket.on("message", textMessage => {
         const user = users[socket.id];
         const message = createMessage(user, textMessage);
-
         socket.broadcast.emit("message", message);
 
     })

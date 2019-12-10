@@ -27,6 +27,7 @@ io.on("connection", socket => {
     socket.on("action", action => {
         switch (action.type) {
             case "server/join":
+                console.log("Got join event", action.data);
                 users[socket.id].username = action.data;
                 users[socket.id].avatar = createUserAvatar();
                 io.emit("action", { type: "online_List", data: createUserOnline() });
