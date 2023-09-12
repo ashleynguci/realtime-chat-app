@@ -4,5 +4,7 @@
 cp .env-cloud .env
 
 # Replace placeholders with secret values
-sed -i "s/GARANT_ADMIN_PASSWORD=/GARANT_ADMIN_PASSWORD=${GARANT_ADMIN_PASSWORD}/" .env
-sed -i "s/CLIENT_ID=/CLIENT_ID=${CLIENT_ID}/" .env
+sed "{
+    s/{{GARANT_ADMIN_PASSWORD}}/$GARANT_ADMIN_PASSWORD/g
+    s/{{CLIENT_ID}}/$CLIENT_ID/g
+}" .env-cloud > .env
