@@ -1,7 +1,7 @@
 # setup-env.sh
 
 # Create .env file from env-cloud template
-cp env-cloud .env
+cp .env-cloud .env
 
 # Replace placeholders with secret values
 sed -i "s/GARANT_ADMIN_PASSWORD=/GARANT_ADMIN_PASSWORD=${GARANT_ADMIN_PASSWORD}/" .env
